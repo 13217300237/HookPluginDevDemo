@@ -23,12 +23,20 @@ public class MainActivity extends Activity {//前方大坑！这里不能用AppC
         ClassLoader cl = getClassLoader();
         Log.i("David", "onCreate: " + cl);//classLoader
 
+//        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent();
+//                intent.setComponent(new ComponentName("study.hank.com.myhookplugindevdemo",
+//                        "study.hank.com.myhookplugindevdemo.ui.Main2Activity"));
+//                startActivity(intent);
+//            }
+//        });
+
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setComponent(new ComponentName("study.hank.com.myhookplugindevdemo",
-                        "study.hank.com.myhookplugindevdemo.ui.Main2Activity"));
+                Intent intent = new Intent(MainActivity.this,Main2Activity.class);
                 startActivity(intent);
             }
         });

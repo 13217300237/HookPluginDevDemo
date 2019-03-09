@@ -23,20 +23,21 @@ public class MyApplication extends Application {
         super.onCreate();
         pluginPath = AssetUtil.copyAssetToCache(this, Const.PLUGIN_FILE_NAME);
 
-        //Hook第一次
+        //Hook第一次，绕过manifest检测
         GlobalActivityHookHelper.hook(this);
 
-        //Hook第二次
-        HookInjectHelper.injectPluginClass(this);//这里通过Ｈｏｏｋ手段已经把插件的源文件class导入了内存中
-        //OK,这个就是我研究的重点，莫名其妙啊！？
+        //Hook第二次把插件的源文件class导入到系统的ClassLoader中
+        HookInjectHelper.injectPluginClass(this);
 
-        //加载插件资源包
+        //Hook第三次，加载插件资源包，让系统的Resources能够读取插件的资源
         newResource = HookInjectHelper.injectPluginResources(this);
     }
 
-
+    //重写资源管理器,资源管理器是每个Activity自带的，
+    // 而Application的getResources则是所有Activity共有的
+    //重写了它，就不必一个一个Activity去重写了
     @Override
-    public Resources getResources() {//重写资源管理器,资源管理器是每个Activity自带的，而Application的getResources则是所有Activity共有的
+    public Resources getResources() {
         return newResource == null ? super.getResources() : newResource;
     }
 }

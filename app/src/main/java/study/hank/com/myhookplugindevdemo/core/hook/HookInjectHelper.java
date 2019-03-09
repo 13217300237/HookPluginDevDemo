@@ -18,7 +18,6 @@ import study.hank.com.myhookplugindevdemo.app.MyApplication;
 
 public class HookInjectHelper {
 
-//插件的apk的  dex  -->   Element
 
     /**
      *
@@ -92,7 +91,6 @@ public class HookInjectHelper {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
     }
 

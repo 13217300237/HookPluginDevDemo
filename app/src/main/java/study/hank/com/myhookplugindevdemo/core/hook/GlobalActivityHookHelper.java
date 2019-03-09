@@ -34,7 +34,7 @@ public class GlobalActivityHookHelper {
             hookActivityThread_mH_before28(context);
         }
 
-        hookPMAfter28(context);//由于AppCompatActivity存在PMS检测，如果这里不hook的话，就会包PackageNameNotFoundException
+        hookPM(context);//由于AppCompatActivity存在PMS检测，如果这里不hook的话，就会包PackageNameNotFoundException
     }
 
     //设备系统版本是不是大于等于26
@@ -307,7 +307,7 @@ public class GlobalActivityHookHelper {
      *
      * @param context
      */
-    private static void hookPMAfter28(Context context) {
+    private static void hookPM(Context context) {
         try {
             String pmName = Util.getPMName(context);
             String hostClzName = Util.getHostClzName(context, pmName);
